@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import numpy as np
 from PIL import Image
-from PyQt5.QtGui import QPixmap, QImage  # Replace PyQt5 with PySide6 if needed
+from PySide6.QtGui import QPixmap, QImage  # Replace PyQt5 with PySide6 if needed
 import pymupdf # PyMuPDF
 from scipy.ndimage import rotate
 import cv2
