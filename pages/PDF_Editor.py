@@ -8,7 +8,12 @@ import pikepdf
 from PIL import UnidentifiedImageError
 import traceback
 
-
+st.logo(
+    "pages/dse_logo.png",
+    link="https://dse.enterprises",
+    size="large"
+    # icon_image=LOGO_URL_SMALL,
+)
 compressed_pdfs = []
 names = []
 
