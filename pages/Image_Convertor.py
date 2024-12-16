@@ -5,6 +5,12 @@ import img2pdf
 import numpy as np
 from pillow_heif import open_heif
 
+st.logo(
+    "pages/dse_logo.png",
+    link="https://dse.enterprises",
+    size="large"
+    # icon_image=LOGO_URL_SMALL,
+)
 container_pdf, container_chat = st.columns([50, 50])
 st.header("You are at Image Convertor")
 
