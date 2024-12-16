@@ -10,7 +10,12 @@ from stqdm import stqdm
 from io import BytesIO
 import img2pdf
 
-
+st.logo(
+    "pages/dse_logo.png",
+    link="https://dse.enterprises",
+    size="large"
+    # icon_image=LOGO_URL_SMALL,
+)
 # st.set_page_config(page_title="📚 Image Doctor")
 st.markdown("""<h1 style='text-align: center;'>🩺🖼️ Image Doctor</h1> 
 <style>
