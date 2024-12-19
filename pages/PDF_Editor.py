@@ -3,10 +3,11 @@ from io import BytesIO
 from PyPDF2 import PdfMerger, PdfReader, PdfWriter
 from pikepdf import PdfImage
 from stqdm import stqdm
-from streamlit_pdf_viewer import pdf_viewer
 import pikepdf
 from PIL import UnidentifiedImageError
 import traceback
+from streamlit_pdf_viewer import pdf_viewer
+
 
 st.logo(
     "pages/dse_logo.png",
@@ -133,6 +134,8 @@ container_pdf, container_chat = st.columns([50, 50])
 st.header("You are at PDF Editor")
 
 pdffiles = st.file_uploader("Upload your PDFs here:", type="pdf", accept_multiple_files=True)
+
+
 if pdffiles:
     # Store file names and content in a list
     file_list = [(file.name, file.getvalue()) for file in pdffiles]
@@ -143,11 +146,16 @@ if pdffiles:
 
     # Multiselect to arrange files
     sorted_options = st.sidebar.multiselect(
-        "Drag to reorder files for merging",
+        "Click to reorder files for merging",
         uploaded_file_names,
         default=uploaded_file_names  # Show in the original order
     )
-
+    with container_pdf:
+        with st.sidebar:
+            for file in pdffiles:
+                binary_data = file.getvalue()
+                pdf_viewer(input=binary_data,
+                           width=300)
     # Create the sorted file list based on user selection
     sorted_files = [file for file in file_list if file[0] in sorted_options]
 
@@ -158,9 +166,6 @@ if pdffiles:
 
 _, centre, __ = st.columns(3)
 centre.button("Reset", type="primary", use_container_width=True)
-# options = st.sidebar.multiselect(
-#        "Arrange files for merging",
-#        file_list, file_list)
 quality = centre.slider(
         "Specify quality value",
         min_value=50, max_value=300, value=80, step=5)
