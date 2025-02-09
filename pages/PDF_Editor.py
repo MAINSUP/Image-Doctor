@@ -8,7 +8,6 @@ from PIL import UnidentifiedImageError
 import traceback
 from streamlit_pdf_viewer import pdf_viewer
 
-
 st.logo(
     "pages/dse_logo.png",
     link="https://dse.enterprises",
@@ -31,6 +30,7 @@ div.stButton > button:hover {
     color:#ff0000;
     }
 </style>""", unsafe_allow_html=True)
+
 
 
 def merge_pdf(sorted_files):
@@ -124,7 +124,7 @@ def lossless_pdf_compression(pdffiles):
             writer.write(compressed_pdf_buffer)
             compressed_pdf_buffer.seek(0)  # Reset buffer pointer
             processed_pdfs.append(compressed_pdf_buffer)
-            names.append(file.name)
+            names.append(pdf.name)
         except Exception as e:
             st.error(f"Failed to process a PDF: {e}")
     return processed_pdfs, names
@@ -150,19 +150,20 @@ if pdffiles:
         uploaded_file_names,
         default=uploaded_file_names  # Show in the original order
     )
+
     with container_pdf:
         with st.sidebar:
-            for file in pdffiles:
-                binary_data = file.getvalue()
+            for file in file_list:
+                binary_data = file[1]
                 pdf_viewer(input=binary_data,
                            width=300)
     # Create the sorted file list based on user selection
-    sorted_files = [file for file in file_list if file[0] in sorted_options]
-
-    if sorted_files and len(sorted_files) == len(file_list):  # Ensure all files are selected
+    if sorted_options and len(sorted_options) == len(file_list):  # Ensure all files are selected
         st.write("Ready to merge the following PDFs (in selected order):")
-        for name, _ in sorted_files:
+        for name in sorted_options:
             st.write(f"- {name}")
+    global sorted_files
+    sorted_files= sorted(file_list, key=lambda x: sorted_options.index(x[0]))
 
 _, centre, __ = st.columns(3)
 centre.button("Reset", type="primary", use_container_width=True)
@@ -207,5 +208,8 @@ if right.button("Perform lossless PDF compression", icon="🗜️", use_containe
             mime="PDF/pdf"
         )
     right.markdown("Ruduced file size")
+
+
+
 
 
