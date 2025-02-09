@@ -60,7 +60,7 @@ with st_horizontal():
     app2 = st.button("PDF Editor")
     app3 = st.button("Image Convertor")
     app4 = st.button("Web Links Editor")
-    app5 = st.button("Video_Embeder")
+    app5 = st.button("Video_Embedder")
 
     if app1:
         st.switch_page("pages/Image_Doctor.py")
@@ -71,4 +71,4 @@ with st_horizontal():
     if app4:
         st.switch_page("pages/WEB_Links_Editor.py")
     if app5:
-        st.switch_page("pages/Video_Embeder.py")
+        st.switch_page("pages/Video_Embedder.py")
