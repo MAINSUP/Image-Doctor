@@ -1,7 +1,5 @@
 numpy~=1.26.4
-scipy~=1.14.1
 pathlib~=1.0.1
-python-telegram-bot~=20.7
 streamlit~=1.41.0
 pikepdf~=9.4.2
 PyPDF2~=3.0.1
@@ -17,3 +15,4 @@ rarfile~=4.1
 PySide6~=6.8.1
 opencv-contrib-python
 streamlit_pdf_viewer
+reportlab~=4.3.0
